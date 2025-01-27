@@ -1,5 +1,5 @@
 <?php
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $name = $_POST['name'];
 $email = $_POST['email'];
 $subject = $_POST['subject']
@@ -9,10 +9,8 @@ $mailheader = "From:".$name."<".$email.">\r\n";
 
 $recipient = "josephabeba@gmail.com";
 
-mail($recipient, $subject, $message, $mailheader) 0r die("Error");
+if (mail($recipient, $subject, $message, $mailheader)) {
 echo'
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +28,14 @@ echo'
       
     </div>
   </body>
-</html>
+  
+</html>';
+  } else {
+        echo "Error sending email.";
+    }
+} else {
+    echo "Invalid request method.";
+}
+?> 
 
-';
 
-?>
